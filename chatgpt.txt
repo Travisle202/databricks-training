@@ -1,0 +1,20 @@
+i have a pyspark dataframe with these columns:
+- cluster_id: int
+- bus_unit: str
+- registration_num: str
+- org_name: list[str]
+- lgl_entity_name: str
+- entity_name: str
+- source: str
+- lat: double
+- long: double
+- last_detected_date: date 
+here's the task:
+  - for each cluster: 
+      if there are only 1 point with source == "cci" then we get that point with bus_unit, lgl_entity_name, lat/long. For all other points in same cluster: 
+        when source == "fcc" we collect the records with latest last_detected_date and collect_set on entity_name, registration_num, lat/long. when source == "qrc" we collect the records with latest last_detected_date and collect_set on org_name, lat/long
+      if there are more than 1 point with source =="cci" then we keep all the source==cci points independently with bus_unit, lgl_entity_name, lat/long. For all other points in same cluster:
+        we want to attach other points to each cci points that are close in terms of distance, 
+        if there are multiple points got attached we use same logic as above to which metadata to collect
+
+Can you help me generate code for this problem please
